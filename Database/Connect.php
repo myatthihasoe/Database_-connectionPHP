@@ -9,18 +9,16 @@ $unibc_ecom = "unibc_ecom";
 $connect = new Connection($host, $dbname, $username, $password);
 $pdo = $connect->getConnection();
 
-// var_dump($pdo);
-
 //Use try catch if create database
 try {
-    $create_databse = "CREATE DATABASE $unibc_ecom";
-    $pdo->exec($create_databse);
+    $create_database = "CREATE DATABASE IF NOT EXISTS $unibc_ecom";
+    $pdo->exec($create_database);
     $pdo->exec("USE $unibc_ecom");
-    $pdo->exec("CREATE TABLE unibc_users"); //create table in database
-    $pdo->exec("");
+    
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
+
 ?>
 
-<!--create DATABSE PDO
+<!-- Create PDO Database -->
