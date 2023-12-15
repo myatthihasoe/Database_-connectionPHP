@@ -14,7 +14,6 @@ try {
     $create_database = "CREATE DATABASE IF NOT EXISTS $unibc_ecom";
     $pdo->exec($create_database);
     $pdo->exec("USE $unibc_ecom");
-    
 } catch (PDOException $e) {
     echo $e->getMessage();
 }

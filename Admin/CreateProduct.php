@@ -1,0 +1,61 @@
+<?php
+require_once("../Style/head.php");
+require_once("../Database/Connect.php");
+
+if (isset($_POST['create'])) {
+    $name = $_POST['productName'];
+    $cat = $_POST['productCat'];
+    $price = $_POST['productPrice'];
+    $stock = $_POST['productStock'];
+    $desp = $_POST['productDes'];
+
+    echo $name, $cat, $price, $stock, $desp;
+
+    $create_product = "INSERT INTO products VALUES ('','$name','$cat','$price','$stock','$desp')";
+    try {
+        $pdo->exec($create_product);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+    header("Location: CreateProduct.php?isCreated=ok");
+}
+// $create_product = "INSERT INTO products(product_name, product_cat, product_price, price_stock, product_description) VALUES ('',':name',':cat',':price',':stock',':desp')";
+// $stmt = $pdo->prepare($create_product);
+// // $stmt -> bindParam(':id', '');
+// $stmt->bindParam(':name', $name);
+// $stmt->bindParam(':cat', $cat);
+// $stmt->bindParam(':price', $price);
+// $stmt->bindParam(':stock', $stock);
+// $stmt->bindParam(':desp', $desp);
+// $stmt->execute();
+
+?>
+
+<div class="container mt-3 py-3 bg-secondary text-light">
+    <span class="text-danger"><?php echo (isset($_GET['isCreated'])) ? "product is created." : null ?></span>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="productName" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="productName" name="productName" placeholder="Enter Product Name" required>
+        </div>
+        <div class="mb-3">
+            <label for="productCat" class="form-label">Product Category</label>
+            <input type="text" class="form-control" id="productCat" name="productCat" placeholder="Enter Product Category" required>
+        </div>
+        <div class="mb-3">
+            <label for="productPrice" class="form-label">Product Price</label>
+            <input type="number" class="form-control" id="productPrice" name="productPrice" placeholder="Enter Pice" required>
+        </div>
+        <div class="mb-3">
+            <label for="productStock" class="form-label">Product Stock</label>
+            <input type="number" class="form-control" id="productStock" name="productStock" placeholder="Enter Product Stock" required>
+        </div>
+        <div class="mb-3">
+            <label for="productDes" class="form-label">Product Description</label>
+            <textarea class="form-control" id="productDes" rows="3" name="productDes" placeholder="Enter Product Description"></textarea>
+        </div>
+        <button class="btn btn-outline-warning text-light" name="create">Create</button>
+        <a href="CreateProduct.php" class="btn btn-outline-warning text-light">Clear</a>
+    </form>
+</div>

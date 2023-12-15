@@ -24,14 +24,15 @@ $create_users = "CREATE TABLE IF NOT EXISTS $users(
 
 
 try {
-     
+
     $pdo->exec($create_products);
     $pdo->exec($create_users);
-    echo" $products and $users table are created";
+    echo " $products and $users table are created";
 
-    // $stmt = $pdo-> prepare($create_products); 
+    // $stmt = $pdo-> prepare($create_products); //first prepare and execute
     // $stmt -> execute();
-    
+
 } catch (PDOException $pde) {
     echo $pde->getMessage();
 }
+?>
