@@ -33,6 +33,7 @@ if (isset($_POST['create'])) {
 ?>
 
 <div class="container mt-3 py-3 bg-secondary text-light">
+    <a href="ViewProducts.php" class="btn btn-outline-success">Home</a>
     <span class="text-danger"><?php echo (isset($_GET['isCreated'])) ? "product is created." : null ?></span>
     <form method="POST">
         <div class="mb-3">
@@ -56,6 +57,7 @@ if (isset($_POST['create'])) {
             <textarea class="form-control" id="productDes" rows="3" name="productDes" placeholder="Enter Product Description"></textarea>
         </div>
         <button class="btn btn-outline-warning text-light" name="create">Create</button>
-        <a href="CreateProduct.php" class="btn btn-outline-warning text-light">Clear</a>
+        <a href="CreateProduct.php" class="btn btn-outline-warning text-light">Refresh</a>
+        <button class="btn btn-outline-light" type="reset">Clear</button>
     </form>
 </div>
