@@ -5,7 +5,37 @@ $id = $_GET['id'];
 $view_products = "SELECT * FROM products where product_id= $id";
 $stmt = $pdo->query($view_products);
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
+// echo "<pre>";
 // print_r($result);
+if (isset($_POST['update'])) {
+    // echo "update clicked";
+    $name = $_POST['pro_name'];
+    $cat = $_POST['pro_category'];
+    $price = $_POST['pro_price'];
+    $stock = $_POST['pro_stock'];
+    $descript = $_POST['pro_desc'];
+
+    $update_product = "UPDATE products SET 
+                        product_name = '$name',
+                        product_category='$cat',
+                        product_price='$price',
+                        product_stock='$stock',
+                        product_description='$descript' 
+                        WHERE product_id='$id'";
+
+    try {
+        $stmt = $pdo->exec($update_product);
+        header("Location:UpdateProduct.php?id=$id&success=true");
+    } catch (PDOException $e) {
+        // echo $e->getMessage();
+        echo"<script>alert('Please Check Database. Data is not updated.')</script>";
+    }   
+}
+
+if (isset($_GET['success'])) {
+    echo"<script>alert('Product Updated.')</script>";
+}
+
 ?>
 
 <style>
@@ -20,8 +50,9 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 </style>
 
 <div>
-    <!-- <h1>Update Page <?= $id ?></h1> -->
+    <!-- <h1>ID <?= $id ?> Update Page </h1> -->
     <div class="container bootstrap snippets bootdey">
+    <a href="ViewProducts.php" class="btn btn-outline-success">Home</a>
         <h1 class="text-primary">Edit Profile</h1>
         <hr>
         <div class="row">
@@ -41,7 +72,7 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
                     <h3>Product Detail Information..</h3>
                 </div>
 
-                <form class="form-horizontal ms-4" role="form">
+                <form class="form-horizontal ms-4" role="form" method="POST">
                     <div class="form-group d-flex my-2 ">
                         <label class="col-lg-3 control-label"> ID:</label>
                         <div class="col-lg-8">
@@ -51,29 +82,35 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
                     <div class="form-group d-flex my-2">
                         <label class="col-lg-3 control-label"> Name:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="<?= $result['product_name'] ?>">
+                            <input class="form-control" type="text" value="<?= $result['product_name'] ?>" name="pro_name">
+                        </div>
+                    </div>
+                    <div class="form-group d-flex my-2">
+                        <label class="col-lg-3 control-label"> Catagory:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="<?= $result['product_category'] ?>" name="pro_category">
                         </div>
                     </div>
                     <div class="form-group d-flex my-2">
                         <label class="col-lg-3 control-label">Price:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="<?= $result['product_price'] ?>">
+                            <input class="form-control" type="text" value="<?= $result['product_price'] ?>" name="pro_price">
                         </div>
                     </div>
                     <div class="form-group d-flex my-2 ">
                         <label class="col-lg-3 control-label">Stock:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="<?= $result['product_stock'] ?>">
+                            <input class="form-control" type="text" value="<?= $result['product_stock'] ?>" name="pro_stock">
                         </div>
                     </div>
                     <div class="form-group d-flex my-2 ">
                         <label class="col-lg-3 control-label">Description:</label>
                         <div class="col-lg-8">
-                            <textarea class="form-control" ><?=  $result['product_description']?></textarea>
+                            <textarea class="form-control" name="pro_desc"><?= $result['product_description'] ?></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary">Update</button>
+                        <button class="btn btn-primary" name="update">Update</button>
                         <button class="btn btn-danger">Delete</button>
                     </div>
                 </form>

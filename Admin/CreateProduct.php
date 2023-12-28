@@ -31,9 +31,11 @@ if (isset($_POST['create'])) {
 // $stmt->execute();
 
 ?>
-
-<div class="container mt-3 py-3 bg-secondary text-light">
-    <a href="ViewProducts.php" class="btn btn-outline-success">Home</a>
+<div class="container bootstrap snippets bootdey" style="margin-top: 10px";>
+<a href="ViewProducts.php" class="btn btn-outline-success">Home</a>
+</div>
+<div class="container mt-3 py-3 bg-danger text-light">
+    
     <span class="text-danger"><?php echo (isset($_GET['isCreated'])) ? "product is created." : null ?></span>
     <form method="POST">
         <div class="mb-3">
