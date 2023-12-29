@@ -22,6 +22,11 @@ if (isset($_POST['edit'])) {
   header("Location: UpdateProduct.php?id=$id");
 }
 
+if (isset($_POST['delete'])) {
+  $id = $_POST['id'];
+  header("Location:DeleteProduct.php?id=$id");
+}
+
 ?>
 <div class="container mt-2" style="background-color: grey;">
   <a href="CreateProduct.php" class="btn btn-outline-light my-2">Create</a>
@@ -52,7 +57,7 @@ if (isset($_POST['edit'])) {
             <form method="POST">
               <input type="hidden" value=<?= $product['product_id'] ?> name="id"> 
               <button classbtn name="edit"><i class="fas fa-edit"></i>Update</button>
-              <button classbtn><i class="fa-solid fa-trash"></i></button>
+              <button classbtn name="delete"><i class="fa-solid fa-trash"></i></button>
             </form>
           </td>
 

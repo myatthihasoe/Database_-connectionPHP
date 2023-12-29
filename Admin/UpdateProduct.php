@@ -7,6 +7,10 @@ $stmt = $pdo->query($view_products);
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 // echo "<pre>";
 // print_r($result);
+if(isset($_POST['delete'])){
+    header("Location:DeleteProduct.php?id=$id");
+}
+
 if (isset($_POST['update'])) {
     // echo "update clicked";
     $name = $_POST['pro_name'];
@@ -111,7 +115,7 @@ if (isset($_GET['success'])) {
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary" name="update">Update</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-danger" name="delete">Delete</button>
                     </div>
                 </form>
             </div>
