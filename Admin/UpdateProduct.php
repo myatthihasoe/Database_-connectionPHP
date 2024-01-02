@@ -40,6 +40,25 @@ if (isset($_GET['success'])) {
     echo"<script>alert('Product Updated.')</script>";
 }
 
+//For profile upload 
+if(isset($_POST['upload'])){
+    $ROOT = $_SERVER['DOCUMENT_ROOT'];
+    $target = $ROOT."/Unibc_ecom/images/";
+    $target_file = basename($_FILES['profile_picture']['name']);
+
+    $image = $_FILES['profile_picture']['name'];
+
+    $db = mysqli_connect("localhost","root","","unibc_ecom");
+    $sql = "INSERT INTO images (image) VALUES ('$image')";
+    mysqli_query($db,$sql);
+
+    if(move_uploaded_file($_FILES['profile_picture']['tmp_name'],$target.$target_file)){
+        echo "Image uploaded sucessfully...";
+    }else{
+        echo "There was a problem uploading image";
+    }
+}
+
 ?>
 
 <style>
@@ -64,9 +83,12 @@ if (isset($_GET['success'])) {
             <div class="col-md-3">
                 <div class="text-center">
                     <img src="https://imgs.search.brave.com/eM1kUgbdFkPU5SNpKtF8rvrL1ngAnaH0QDrPrbODlPQ/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9mcmFt/ZXJ1c2VyY29udGVu/dC5jb20vaW1hZ2Vz/L1gyMjVMSFJ2Znpl/Y29wZUVBSVZ0b0dt/akh3US5qcGc" class="avatar img-circle img-thumbnail" alt="avatar">
-                    <h6>Upload a different photo...</h6>
+                    <form method="POST" enctype="multipart/form-data">
+                        <h6>Select a profile picture:</h6>
+                        <input type="file" class="form-control" name="profile_picture" accept=".jpg, .png, .jpeg">
+                        <input type="submit" name="upload" value="Upload">
+                    </form>
 
-                    <input type="file" class="form-control">
                 </div>
             </div>
 
