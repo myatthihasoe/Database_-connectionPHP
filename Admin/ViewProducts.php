@@ -40,6 +40,7 @@ if (isset($_POST['delete'])) {
         <th scope="col">Price</th>
         <th scope="col">Stock</th>
         <th scope="col">Description</th>
+        <th scope="col">Image</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -52,6 +53,7 @@ if (isset($_POST['delete'])) {
           <td><?= $product['product_price'] ?></td>
           <td><?= $product['product_stock'] ?></td>
           <td><?= $product['product_description'] ?></td>
+          <td><?= $product['product_img'] ?></td>
           <td>
           <!-- <form method="POST" action="UpdateProduct.php?id= <?= $product['product_id']?>"> -->
             <form method="POST">

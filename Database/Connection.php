@@ -15,9 +15,9 @@ class Connection
     {
         try {
             $pdo = new PDO(
-                "mysql:host=$this->host; dbname=$this->dbname;",
+                "mysql:host=$this->host; dbname=$this->dbname; password=$this->password;",//set mysql password
                 $this->username,
-                $this->password
+                // $this->password (use if no password)
             );
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //For warning error in user mode
             return $pdo;

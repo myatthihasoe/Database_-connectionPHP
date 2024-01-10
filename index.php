@@ -28,7 +28,13 @@ try {
 <div class="container row d-flex ">
     <?php foreach ($product_array as $key=>$val) : ?>
         <div class="card col-lg-3 col-md-6 col-sm-12 me-5 mb-5" >
-            <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960" class="card-img-top py-2" alt="redCar" >
+
+            <?php 
+                $img = $val ['product_img'];
+                $img = substr($img, 3);//../images ka ../ ko delete
+            ?>
+
+            <img src="<?= $img ?>" class="card-img-top py-2" alt="photo not available" >
             <div class="card-body">
 
                 <h5 class="card-title"><?= $val['product_name']?></h5>

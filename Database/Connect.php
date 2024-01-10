@@ -3,7 +3,7 @@ require_once("Connection.php");
 $host = "localhost"; //127.0.0.1
 $dbname = "mysql";
 $username = "root";
-$password = "";
+$password = "nelson*123";
 $unibc_ecom = "unibc_ecom";
 
 $connect = new Connection($host, $dbname, $username, $password);
