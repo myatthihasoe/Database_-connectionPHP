@@ -1,10 +1,21 @@
 <?php
 require_once("Style/head.php");
+session_start();
+// unset($_SESSION['cart']);
+
+$total_cart = 0;
+if (isset($_SESSION['cart'])) {
+  foreach ($_SESSION['cart'] as $val) {
+    //print_r($val['qty'])
+    $total_cart += $val['qty'];
+  }
+}
 ?>
 <style>
   #navbar {
     color: aliceblue;
   }
+
   /* .navbar navbar-expand-lg bg-body-tertiary py-3 sticky-top{
 
   } */
@@ -46,8 +57,10 @@ require_once("Style/head.php");
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
       </form>
-      <div>
-        <i class="fa-solid fa-cart-plus fa-2xl"></i>
+      <div class="me-2">
+        <button class="btn p-3">
+          <i class="fa-solid fa-cart-plus fa-2xl"><span class="fs-6"><?= $total_cart ?></span></i>
+        </button>
       </div>
     </div>
   </div>
