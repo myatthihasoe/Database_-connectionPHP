@@ -14,7 +14,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //   echo "<br>";
 // }
 
-// when butthon is clicked
+// when button is clicked
 if (isset($_POST['edit'])) {
   echo "edit button clicked";
   $id = $_POST['id'];
@@ -58,8 +58,8 @@ if (isset($_POST['delete'])) {
           <!-- <form method="POST" action="UpdateProduct.php?id= <?= $product['product_id']?>"> -->
             <form method="POST">
               <input type="hidden" value=<?= $product['product_id'] ?> name="id"> 
-              <button classbtn name="edit"><i class="fas fa-edit"></i>Update</button>
-              <button classbtn name="delete"><i class="fa-solid fa-trash"></i></button>
+              <button class="btn" name="edit"><i class="fas fa-edit"></i>Update</button>
+              <button class="btn" name="delete"><i class="fa-solid fa-trash"></i></button>
             </form>
           </td>
 

@@ -10,10 +10,15 @@ if (isset($_SESSION['cart'])) {
     $total_cart += $val['qty'];
   }
 }
+
+if(isset($_POST['cart'])){
+  header("Location:cart.php");
+}
 ?>
 <style>
   #navbar {
     color: aliceblue;
+    
   }
 
   /* .navbar navbar-expand-lg bg-body-tertiary py-3 sticky-top{
@@ -21,7 +26,7 @@ if (isset($_SESSION['cart'])) {
   } */
 </style>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary py-3 sticky-top "><!--Navbar position fixed -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary  py-0 sticky-top "><!--Navbar position fixed -->
   <div class="container-fluid bg-danger" id="navbar">
     <a class="navbar-brand" style="color: aliceblue;" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,11 +62,16 @@ if (isset($_SESSION['cart'])) {
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
       </form>
-      <div class="me-2">
-        <button class="btn p-3">
+
+      <!-- this form uses action   -->
+      <form method="POST">
+      <div class="me-2 mt-3">
+        <button class="btn p-3" name="cart">
           <i class="fa-solid fa-cart-plus fa-2xl"><span class="fs-6"><?= $total_cart ?></span></i>
         </button>
+        </form>
       </div>
+
     </div>
   </div>
 </nav>

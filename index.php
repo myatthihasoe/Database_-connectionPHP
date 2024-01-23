@@ -5,15 +5,14 @@ require_once("Nav.php");
 require_once("Database/Connect.php");
 // session_start(); //session use yin start yay ya
 // unset($_SESSION);//clear session
-// $_SESSION[2]['name'] = "Shirt";
-// print_r($_SESSION);
+
 if (isset($_POST['add_to_cart'])) {
     $id = $_POST['idKey'];
-    header("Location:addToCartSession.php?id=$id");
+    header("Location: addToCartSession.php?id=$id");
 }
+$products = "SELECT * FROM products";
 
 try {
-    $products = "SELECT * FROM products";
     $stmt = $pdo->query($products);
 
     $product_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -34,33 +33,50 @@ try {
     }
 </style>
 
-<div class="container row d-flex ">
-    <?php foreach ($product_array as $key => $val) : ?>
-        <div class="card col-lg-3 col-md-6 col-sm-12 me-5 mb-5">
+<div class="container">
+    <div class="row">
+        <div class="col-1">
 
-            <?php
-            $img = $val['product_img'];
-            $img = substr($img, 3); //../images ka ../ ko delete
-            ?>
+        </div>
+        
+        <div class="col-10">
+            <div class="container row row-cols-3 d-flex ">
+                <?php foreach ($product_array as $key => $val) : ?>
+                     <div class="p-2 col-lg-4 col-md-6 col-sm-12 col-12">  
+                        <!-- dividing with this number to grid total 12  -->
+                        <div class="card ">
 
-            <img src="<?= $img ?>" class="card-img-top py-2" alt="photo not available">
-            <div class="card-body">
+                            <?php
+                            $img = $val['product_img'];
+                            $img = substr($img, 3); //../images ka ../ ko delete
+                            ?>
 
-                <h5 class="card-title"><?= $val['product_name'] ?></h5>
-                <p class="card-text"><?= $val['product_description'] ?></p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Category: <?= $val['product_category'] ?></li>
-                <li class="list-group-item">Price: <?= $val['product_price'] ?>.Ks</li>
-                <li class="list-group-item">Stock: <?= $val['product_stock'] ?></li>
-            </ul>
-            <div class="card-body">
-                <form method="POST">
-                    <input type="hidden" value="<?= $key ?>" name="idKey">
-                    <button class="btn btn-outline-primary" name="add_to_cart">Add to Cart</button>
-                    <button class="btn btn-outline-danger" name="">View Detail</button>
-                </form>
+                            <img src="<?= $img ?>" class="card-img-top py-2" alt="photo not available">
+                            <div class="card-body">
+
+                                <h5 class="card-title"><?= $val['product_name'] ?></h5>
+                                <p class="card-text"><?= $val['product_description'] ?></p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Category: <?= $val['product_category'] ?></li>
+                                <li class="list-group-item">Price: <?= $val['product_price'] ?>.Ks</li>
+                                <li class="list-group-item">Stock: <?= $val['product_stock'] ?></li>
+                            </ul>
+                            <div class="card-body">
+                                <form method="POST">
+                                    <input type="hidden" value="<?= $val['product_id'] ?>" name="idKey">
+                                    <button class="btn btn-outline-primary" name="add_to_cart">Add to Cart</button>
+                                    <button class="btn btn-outline-danger" name="">View Detail</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach ?>
             </div>
         </div>
-    <?php endforeach ?>
+
+        <div class="col-1">
+
+        </div>
+    </div>
 </div>

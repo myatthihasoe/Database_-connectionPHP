@@ -49,7 +49,6 @@ if (isset($_POST['create'])) {
 <a href="ViewProducts.php" class="btn btn-outline-success">Home</a>
 </div>
 <div class="container mt-3 py-3 bg-danger text-light">
-    
     <span class="text-danger"><?php echo (isset($_GET['isCreated'])) ? "product is created." : null ?></span>
     <form method="POST" enctype="multipart/form-data">
         <div class="mb-3">
